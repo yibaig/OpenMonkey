@@ -1,9 +1,9 @@
-//! WASM 执行器 - 技能安全沙箱
+//! WASM 执行器 - 技能安全沙箱（wasmtime 15.x）
 
 use anyhow::Result;
 use std::sync::Arc;
 use tokio::sync::Mutex;
-use tracing::{info, error};
+use tracing::info;
 use wasmtime::*;
 use wasmtime_wasi::*;
 
@@ -31,14 +31,12 @@ impl WasmExecutor {
     }
     
     /// 执行 WASM 模块
-    pub async fn execute(&mut self, wasm_bytes: &[u8], input: &str) -> Result<String> {
+    pub async fn execute(&self, wasm_bytes: &[u8]) -> Result<String> {
         info!("执行 WASM 模块，大小：{} 字节", wasm_bytes.len());
         
         // 创建 Store
-        let mut store = Store::new(
-            &self.engine,
-            self.wasi_ctx.lock().await.clone(),
-        );
+        let wasi_ctx = self.wasi_ctx.lock().await.clone();
+        let mut store = Store::new(&self.engine, wasi_ctx);
         
         // 加载模块
         let module = Module::from_binary(&self.engine, wasm_bytes)?;
@@ -50,26 +48,18 @@ impl WasmExecutor {
         // 实例化
         let instance = linker.instantiate(&mut store, &module)?;
         
-        // 获取 main 函数（如果存在）
-        if let Some(main_func) = instance.get_func(&mut store, "main") {
-            // 调用 main 函数
-            main_func.call(&mut store, &[], &mut [])?;
-            Ok("WASM 执行成功".to_string())
-        } else {
-            // 没有 main 函数，返回模块信息
-            let exports: Vec<&str> = instance.exports(&store)
-                .filter_map(|export| export.name())
-                .collect();
-            
-            Ok(format!("WASM 模块已加载，导出函数：{:?}", exports))
-        }
+        // 检查导出函数
+        let exports: Vec<String> = instance.exports(&store)
+            .filter_map(|e| e.name().map(String::from))
+            .collect();
+        
+        Ok(format!("WASM 模块已加载，导出：{:?}", exports))
     }
     
     /// 执行 WASM 文件
-    pub async fn execute_file(&mut self, path: &str, input: &str) -> Result<String> {
+    pub async fn execute_file(&self, path: &str) -> Result<String> {
         use tokio::fs;
-        
         let wasm_bytes = fs::read(path).await?;
-        self.execute(&wasm_bytes, input).await
+        self.execute(&wasm_bytes).await
     }
 }

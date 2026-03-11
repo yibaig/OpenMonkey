@@ -6,7 +6,8 @@ members = [
     "packages/core/soul",
     "packages/core/agent",
     "packages/shared",
-    # 暂时禁用 WASM 相关包（编译问题）
+    # WASM 相关包暂时禁用（cap-primitives 兼容性问题）
+    # 将在后续版本解决
     # "packages/core/skill",
     # "packages/wasm-runtime",
 ]

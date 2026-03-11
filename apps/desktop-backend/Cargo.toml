@@ -45,12 +45,6 @@ openmonkey-soul = { path = "../../packages/core/soul" }
 # openmonkey-skill = { path = "../../packages/core/skill" }  # 暂时禁用
 openmonkey-agent = { path = "../../packages/core/agent" }
 
-# 日志和错误处理
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
-thiserror = { workspace = true }
-anyhow = { workspace = true }
-
 [features]
 default = ["custom-protocol"]
 custom-protocol = ["tauri/custom-protocol"]

@@ -6,9 +6,12 @@ description = "OpenMonkey 技能引擎 - 支持 WASM 沙箱执行"
 authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
 
 [dependencies]
-# WASM 运行时
+# WASM 运行时（使用稳定版本）
 wasmtime = "15.0"
 wasmtime-wasi = "15.0"
+
+# UUID
+uuid = { workspace = true }
 
 # 序列化
 serde = { version = "1.0", features = ["derive"] }

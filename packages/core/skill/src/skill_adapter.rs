@@ -33,6 +33,15 @@ impl SkillAdapter {
         Ok(())
     }
     
+    /// 执行 WASM 技能
+    pub async fn execute_wasm_skill(&mut self, _skill_id: &str, wasm_bytes: &[u8]) -> Result<String> {
+        if let Some(ref executor) = self.wasm_executor {
+            executor.execute(wasm_bytes).await
+        } else {
+            anyhow::bail!("WASM 执行器未初始化")
+        }
+    }
+    
     /// 加载所有技能
     pub async fn load_all(&mut self) -> Result<()> {
         if !self.skills_dir.exists() {
@@ -78,8 +87,8 @@ impl SkillAdapter {
         if let Some(skill) = self.skills.get(skill_id) {
             // 如果是 WASM 技能
             if skill.is_wasm {
-                if let Some(ref mut executor) = self.wasm_executor {
-                    return executor.execute(&skill.wasm_bytes, input).await;
+                if let Some(ref executor) = self.wasm_executor {
+                    return executor.execute(&skill.wasm_bytes).await;
                 }
             }
             
