@@ -69,7 +69,7 @@ impl SecureVault {
         
         // Try keyring
         if let Some(ref entry) = self.entry {
-            if let Err(e) = entry.delete_credential() {
+            if let Err(e) = entry.delete_password() {
                 eprintln!("Keyring delete failed: {}", e);
                 success = false;
             }

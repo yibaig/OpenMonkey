@@ -64,13 +64,13 @@ impl SoulManager {
         let agents_path = self.get_agents_path();
 
         if !soul_path.exists() {
-            std::fs::write(&soul_path, include_str!("../../../assets/templates/soul/SOUL.md"))?;
+            std::fs::write(&soul_path, include_str!("../../../../packages/core/soul/templates/SOUL.md"))?;
         }
         if !user_path.exists() {
-            std::fs::write(&user_path, include_str!("../../../assets/templates/soul/USER.md"))?;
+            std::fs::write(&user_path, include_str!("../../../../packages/core/soul/templates/USER.md"))?;
         }
         if !agents_path.exists() {
-            std::fs::write(&agents_path, include_str!("../../../assets/templates/soul/AGENTS.md"))?;
+            std::fs::write(&agents_path, include_str!("../../../../packages/core/soul/templates/AGENTS.md"))?;
         }
 
         Ok(())

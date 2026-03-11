@@ -4,10 +4,11 @@ members = [
     "apps/desktop-backend",
     "packages/core/memory",
     "packages/core/soul",
-    "packages/core/skill",
     "packages/core/agent",
-    "packages/wasm-runtime",
     "packages/shared",
+    # 暂时禁用 WASM 相关包（编译问题）
+    # "packages/core/skill",
+    # "packages/wasm-runtime",
 ]
 
 [workspace.package]
@@ -37,7 +38,7 @@ sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio", "chrono"] }
 reqwest = { version = "0.11", features = ["json"] }
 
 # 安全存储
-keyring = { version = "2.0", features = ["crypto-rust"] }
+keyring = { version = "2.0", features = ["secret-service"] }
 
 # 文件系统
 notify = "6.0"

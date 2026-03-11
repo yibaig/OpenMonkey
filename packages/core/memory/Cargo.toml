@@ -7,11 +7,16 @@ authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
 
 [dependencies]
 # 数据库
-sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio", "chrono"] }
-qdrant-client = "1.7"
+sqlx = { workspace = true, optional = true }
+
+# 暂时移除 qdrant 依赖，解决编译问题
+# qdrant-client = { workspace = true }
 
 # 异步运行时
-tokio = { version = "1.0", features = ["full"] }
+tokio = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
 
 # 序列化
 serde = { version = "1.0", features = ["derive"] }
@@ -33,7 +38,8 @@ candle-transformers = { version = "0.4", optional = true }
 candle-core = { version = "0.4", optional = true }
 
 [features]
-default = []
+default = ["sqlx"]
+sqlx = ["dep:sqlx"]
 embedding = ["candle-transformers", "candle-core"]
 
 [dev-dependencies]

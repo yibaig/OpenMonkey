@@ -6,9 +6,12 @@ description = "OpenMonkey WASM 运行时 - 技能安全执行沙箱"
 authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
 
 [dependencies]
+# OpenMonkey 内部包
+openmonkey-skill = { path = "../core/skill" }
+
 # WASM 运行时
-wasmtime = "15.0"
-wasmtime-wasi = "15.0"
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
 
 # 异步运行时
 tokio = { version = "1.0", features = ["full"] }

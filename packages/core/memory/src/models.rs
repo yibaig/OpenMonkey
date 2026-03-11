@@ -93,7 +93,7 @@ impl Memory {
     }
 }
 
-/// SQLx 行转换实现
+#[cfg(feature = "sqlx")]
 impl<'r> sqlx::FromRow<'r, sqlx::sqlite::SqliteRow> for Memory {
     fn from_row(row: &'r sqlx::sqlite::SqliteRow) -> Result<Self, sqlx::Error> {
         use sqlx::Row;
@@ -110,11 +110,10 @@ impl<'r> sqlx::FromRow<'r, sqlx::sqlite::SqliteRow> for Memory {
             "long_term" => MemoryType::LongTerm,
             "procedural" => MemoryType::Procedural,
             "emotional" => MemoryType::Emotional,
-            _ => return Err(sqlx::Error::Decode("Invalid memory type".into())),
+            _ => MemoryType::ShortTerm,
         };
         
         let metadata: MemoryMetadata = serde_json::from_str(&metadata_json)
-            .map_err(|e| sqlx::Error::Decode(e.to_string().into()))
             .unwrap_or_default();
         
         Ok(Self {

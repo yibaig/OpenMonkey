@@ -19,7 +19,7 @@ serde_yaml = { workspace = true }
 tokio = { workspace = true }
 sqlx = { workspace = true }
 reqwest = { workspace = true }
-keyring = { workspace = true }
+keyring = { version = "2.0", features = ["secret-service"] }
 notify = { workspace = true }
 dirs = { workspace = true }
 slug = { workspace = true }
@@ -42,7 +42,7 @@ rand = { workspace = true }
 # OpenMonkey 内部包
 openmonkey-memory = { path = "../../packages/core/memory" }
 openmonkey-soul = { path = "../../packages/core/soul" }
-openmonkey-skill = { path = "../../packages/core/skill" }
+# openmonkey-skill = { path = "../../packages/core/skill" }  # 暂时禁用
 openmonkey-agent = { path = "../../packages/core/agent" }
 
 # 日志和错误处理
