@@ -1,25 +1,82 @@
 [workspace]
-members = ["src-tauri"]
 resolver = "2"
+members = [
+    "apps/desktop-backend",
+    "packages/core/memory",
+    "packages/core/soul",
+    "packages/core/skill",
+    "packages/core/agent",
+    "packages/wasm-runtime",
+    "packages/shared",
+]
 
 [workspace.package]
-version = "2.0.0"
-authors = ["OpenMonkey Team"]
-license = "MIT"
-repository = ""
+version = "0.2.0"
 edition = "2021"
+authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
+license = "MIT"
+repository = "https://github.com/yibaig/OpenMonkey"
 
 [workspace.dependencies]
-tauri = { version = "2", features = ["devtools"] }
-tauri-plugin-shell = "2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+# Tauri
+tauri = { version = "2.0" }
+tauri-plugin-shell = { version = "2.0" }
+
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 serde_yaml = "0.9"
-tokio = { version = "1", features = ["full"] }
-sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "sqlite"] }
-reqwest = { version = "0.12", features = ["json", "stream"] }
-keyring = "3"
-notify = "7"
-dirs = "5"
+
+# 异步运行时
+tokio = { version = "1.0", features = ["full"] }
+
+# 数据库
+sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio", "chrono"] }
+
+# HTTP 客户端
+reqwest = { version = "0.11", features = ["json"] }
+
+# 安全存储
+keyring = { version = "2.0", features = ["crypto-rust"] }
+
+# 文件系统
+notify = "6.0"
+dirs = "5.0"
+
+# 工具
 slug = "0.1"
-chrono = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
+
+# 日志
+log = "0.4"
+env_logger = "0.10"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 加密
+base64 = "0.22"
+rand = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+
+# WebSocket
+tokio-tungstenite = "0.21"
+futures = "0.3"
+url = "2.5"
+
+# 异步工具
+async-trait = "0.1"
+
+# WASM
+wasmtime = "15.0"
+wasmtime-wasi = "15.0"
+
+# Qdrant
+qdrant-client = "1.7"
+
+# UUID
+uuid = { version = "1.0", features = ["v4"] }
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"

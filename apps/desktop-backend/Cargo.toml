@@ -36,8 +36,20 @@ log = "0.4"
 env_logger = "0.10"
 
 # Crypto dependencies for Feishu message decryption
-base64 = "0.22"
-rand = "0.8"
+base64 = { workspace = true }
+rand = { workspace = true }
+
+# OpenMonkey 内部包
+openmonkey-memory = { path = "../../packages/core/memory" }
+openmonkey-soul = { path = "../../packages/core/soul" }
+openmonkey-skill = { path = "../../packages/core/skill" }
+openmonkey-agent = { path = "../../packages/core/agent" }
+
+# 日志和错误处理
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 
 [features]
 default = ["custom-protocol"]

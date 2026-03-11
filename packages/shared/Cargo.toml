@@ -1,0 +1,31 @@
+[package]
+name = "openmonkey-shared"
+version = "0.1.0"
+edition = "2021"
+description = "OpenMonkey 共享工具库"
+authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
+
+[dependencies]
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"
+
+# 日志
+tracing = "0.1"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID
+uuid = { version = "1.0", features = ["v4"] }
+
+# 加密
+sha2 = "0.10"
+hex = "0.4"
+
+[dev-dependencies]
+tokio-test = "0.4"

@@ -1,0 +1,27 @@
+[package]
+name = "openmonkey-soul"
+version = "0.1.0"
+edition = "2021"
+description = "OpenMonkey 灵魂系统 - 人格配置和管理"
+authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
+
+[dependencies]
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 文件系统
+tokio = { version = "1.0", features = ["fs"] }
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"
+
+# 日志
+tracing = "0.1"
+
+# 路径处理
+pathdiff = "0.2"
+
+[dev-dependencies]
+tokio-test = "0.4"

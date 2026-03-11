@@ -1,0 +1,40 @@
+[package]
+name = "openmonkey-memory"
+version = "0.1.0"
+edition = "2021"
+description = "OpenMonkey 记忆系统 - 支持 SQLite + Qdrant 向量检索"
+authors = ["OpenMonkey Team <yibaig@openmonkey.ai>"]
+
+[dependencies]
+# 数据库
+sqlx = { version = "0.7", features = ["sqlite", "runtime-tokio", "chrono"] }
+qdrant-client = "1.7"
+
+# 异步运行时
+tokio = { version = "1.0", features = ["full"] }
+
+# 序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 时间处理
+chrono = { version = "0.4", features = ["serde"] }
+
+# 错误处理
+thiserror = "1.0"
+anyhow = "1.0"
+
+# 日志
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 嵌入模型（可选）
+candle-transformers = { version = "0.4", optional = true }
+candle-core = { version = "0.4", optional = true }
+
+[features]
+default = []
+embedding = ["candle-transformers", "candle-core"]
+
+[dev-dependencies]
+tokio-test = "0.4"
