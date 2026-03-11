@@ -1,0 +1,25 @@
+[workspace]
+members = ["src-tauri"]
+resolver = "2"
+
+[workspace.package]
+version = "2.0.0"
+authors = ["OpenMonkey Team"]
+license = "MIT"
+repository = ""
+edition = "2021"
+
+[workspace.dependencies]
+tauri = { version = "2", features = ["devtools"] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+tokio = { version = "1", features = ["full"] }
+sqlx = { version = "0.8", features = ["runtime-tokio-rustls", "sqlite"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+keyring = "3"
+notify = "7"
+dirs = "5"
+slug = "0.1"
+chrono = "0.4"
